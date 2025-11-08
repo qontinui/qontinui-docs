@@ -1,0 +1,316 @@
+{
+  "automation_functions": [
+    {
+      "id": 1,
+      "name": "calculateStatistics",
+      "description": "Calculates sum, average, and count from a list of numbers",
+      "return_type": "object",
+      "parameters": [
+        {
+          "name": "numbers",
+          "type": "array"
+        }
+      ],
+      "statements": [
+        {
+          "statementType": "variableDeclaration",
+          "variableName": "sum",
+          "variableType": "integer",
+          "initialValue": {
+            "expressionType": "literal",
+            "valueType": "integer",
+            "value": 0
+          }
+        },
+        {
+          "statementType": "variableDeclaration",
+          "variableName": "count",
+          "variableType": "integer",
+          "initialValue": {
+            "expressionType": "literal",
+            "valueType": "integer",
+            "value": 0
+          }
+        },
+        {
+          "statementType": "variableDeclaration",
+          "variableName": "min",
+          "variableType": "integer",
+          "initialValue": {
+            "expressionType": "literal",
+            "valueType": "integer",
+            "value": 999999
+          }
+        },
+        {
+          "statementType": "variableDeclaration",
+          "variableName": "max",
+          "variableType": "integer",
+          "initialValue": {
+            "expressionType": "literal",
+            "valueType": "integer",
+            "value": -999999
+          }
+        },
+        {
+          "statementType": "forEach",
+          "variableName": "num",
+          "collection": {
+            "expressionType": "variable",
+            "name": "numbers"
+          },
+          "statements": [
+            {
+              "statementType": "assignment",
+              "variableName": "sum",
+              "value": {
+                "expressionType": "binaryOperation",
+                "operator": "+",
+                "left": {
+                  "expressionType": "variable",
+                  "name": "sum"
+                },
+                "right": {
+                  "expressionType": "variable",
+                  "name": "num"
+                }
+              }
+            },
+            {
+              "statementType": "assignment",
+              "variableName": "count",
+              "value": {
+                "expressionType": "binaryOperation",
+                "operator": "+",
+                "left": {
+                  "expressionType": "variable",
+                  "name": "count"
+                },
+                "right": {
+                  "expressionType": "literal",
+                  "valueType": "integer",
+                  "value": 1
+                }
+              }
+            },
+            {
+              "statementType": "if",
+              "condition": {
+                "expressionType": "binaryOperation",
+                "operator": "<",
+                "left": {
+                  "expressionType": "variable",
+                  "name": "num"
+                },
+                "right": {
+                  "expressionType": "variable",
+                  "name": "min"
+                }
+              },
+              "thenStatements": [
+                {
+                  "statementType": "assignment",
+                  "variableName": "min",
+                  "value": {
+                    "expressionType": "variable",
+                    "name": "num"
+                  }
+                }
+              ]
+            },
+            {
+              "statementType": "if",
+              "condition": {
+                "expressionType": "binaryOperation",
+                "operator": ">",
+                "left": {
+                  "expressionType": "variable",
+                  "name": "num"
+                },
+                "right": {
+                  "expressionType": "variable",
+                  "name": "max"
+                }
+              },
+              "thenStatements": [
+                {
+                  "statementType": "assignment",
+                  "variableName": "max",
+                  "value": {
+                    "expressionType": "variable",
+                    "name": "num"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "statementType": "variableDeclaration",
+          "variableName": "average",
+          "variableType": "double",
+          "initialValue": {
+            "expressionType": "literal",
+            "valueType": "double",
+            "value": 0.0
+          }
+        },
+        {
+          "statementType": "if",
+          "condition": {
+            "expressionType": "binaryOperation",
+            "operator": ">",
+            "left": {
+              "expressionType": "variable",
+              "name": "count"
+            },
+            "right": {
+              "expressionType": "literal",
+              "valueType": "integer",
+              "value": 0
+            }
+          },
+          "thenStatements": [
+            {
+              "statementType": "assignment",
+              "variableName": "average",
+              "value": {
+                "expressionType": "binaryOperation",
+                "operator": "/",
+                "left": {
+                  "expressionType": "variable",
+                  "name": "sum"
+                },
+                "right": {
+                  "expressionType": "variable",
+                  "name": "count"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "statementType": "methodCall",
+          "object": "logger",
+          "method": "info",
+          "arguments": [
+            {
+              "expressionType": "binaryOperation",
+              "operator": "+",
+              "left": {
+                "expressionType": "literal",
+                "valueType": "string",
+                "value": "Statistics calculated - Count: "
+              },
+              "right": {
+                "expressionType": "binaryOperation",
+                "operator": "+",
+                "left": {
+                  "expressionType": "variable",
+                  "name": "count"
+                },
+                "right": {
+                  "expressionType": "binaryOperation",
+                  "operator": "+",
+                  "left": {
+                    "expressionType": "literal",
+                    "valueType": "string",
+                    "value": ", Sum: "
+                  },
+                  "right": {
+                    "expressionType": "binaryOperation",
+                    "operator": "+",
+                    "left": {
+                      "expressionType": "variable",
+                      "name": "sum"
+                    },
+                    "right": {
+                      "expressionType": "binaryOperation",
+                      "operator": "+",
+                      "left": {
+                        "expressionType": "literal",
+                        "valueType": "string",
+                        "value": ", Avg: "
+                      },
+                      "right": {
+                        "expressionType": "variable",
+                        "name": "average"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "statementType": "variableDeclaration",
+          "variableName": "stats",
+          "variableType": "object",
+          "initialValue": {
+            "expressionType": "builder",
+            "builderType": "Statistics.Builder",
+            "methodCalls": [
+              {
+                "method": "withSum",
+                "arguments": [
+                  {
+                    "expressionType": "variable",
+                    "name": "sum"
+                  }
+                ]
+              },
+              {
+                "method": "withCount",
+                "arguments": [
+                  {
+                    "expressionType": "variable",
+                    "name": "count"
+                  }
+                ]
+              },
+              {
+                "method": "withAverage",
+                "arguments": [
+                  {
+                    "expressionType": "variable",
+                    "name": "average"
+                  }
+                ]
+              },
+              {
+                "method": "withMin",
+                "arguments": [
+                  {
+                    "expressionType": "variable",
+                    "name": "min"
+                  }
+                ]
+              },
+              {
+                "method": "withMax",
+                "arguments": [
+                  {
+                    "expressionType": "variable",
+                    "name": "max"
+                  }
+                ]
+              },
+              {
+                "method": "build",
+                "arguments": []
+              }
+            ]
+          }
+        },
+        {
+          "statementType": "return",
+          "value": {
+            "expressionType": "variable",
+            "name": "stats"
+          }
+        }
+      ]
+    }
+  ]
+}

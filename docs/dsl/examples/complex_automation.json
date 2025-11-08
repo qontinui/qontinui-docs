@@ -1,0 +1,485 @@
+{
+  "automation_functions": [
+    {
+      "id": 1,
+      "name": "loginWorkflow",
+      "description": "Complete login workflow with validation and error handling",
+      "return_type": "boolean",
+      "parameters": [
+        {
+          "name": "username",
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "type": "string"
+        },
+        {
+          "name": "rememberMe",
+          "type": "boolean"
+        }
+      ],
+      "statements": [
+        {
+          "statementType": "methodCall",
+          "object": "logger",
+          "method": "info",
+          "arguments": [
+            {
+              "expressionType": "literal",
+              "valueType": "string",
+              "value": "Starting login workflow..."
+            }
+          ]
+        },
+        {
+          "statementType": "variableDeclaration",
+          "variableName": "isValidInput",
+          "variableType": "boolean",
+          "initialValue": {
+            "expressionType": "binaryOperation",
+            "operator": "&&",
+            "left": {
+              "expressionType": "binaryOperation",
+              "operator": "!=",
+              "left": {
+                "expressionType": "variable",
+                "name": "username"
+              },
+              "right": {
+                "expressionType": "literal",
+                "valueType": "string",
+                "value": ""
+              }
+            },
+            "right": {
+              "expressionType": "binaryOperation",
+              "operator": "!=",
+              "left": {
+                "expressionType": "variable",
+                "name": "password"
+              },
+              "right": {
+                "expressionType": "literal",
+                "valueType": "string",
+                "value": ""
+              }
+            }
+          }
+        },
+        {
+          "statementType": "if",
+          "condition": {
+            "expressionType": "binaryOperation",
+            "operator": "==",
+            "left": {
+              "expressionType": "variable",
+              "name": "isValidInput"
+            },
+            "right": {
+              "expressionType": "literal",
+              "valueType": "boolean",
+              "value": false
+            }
+          },
+          "thenStatements": [
+            {
+              "statementType": "methodCall",
+              "object": "logger",
+              "method": "error",
+              "arguments": [
+                {
+                  "expressionType": "literal",
+                  "valueType": "string",
+                  "value": "Invalid input: username and password cannot be empty"
+                }
+              ]
+            },
+            {
+              "statementType": "return",
+              "value": {
+                "expressionType": "literal",
+                "valueType": "boolean",
+                "value": false
+              }
+            }
+          ]
+        },
+        {
+          "statementType": "variableDeclaration",
+          "variableName": "loginPageFound",
+          "variableType": "boolean",
+          "initialValue": {
+            "expressionType": "methodCall",
+            "object": "browser",
+            "method": "findElement",
+            "arguments": [
+              {
+                "expressionType": "literal",
+                "valueType": "string",
+                "value": "#login-form"
+              }
+            ]
+          }
+        },
+        {
+          "statementType": "if",
+          "condition": {
+            "expressionType": "binaryOperation",
+            "operator": "==",
+            "left": {
+              "expressionType": "variable",
+              "name": "loginPageFound"
+            },
+            "right": {
+              "expressionType": "literal",
+              "valueType": "boolean",
+              "value": false
+            }
+          },
+          "thenStatements": [
+            {
+              "statementType": "methodCall",
+              "object": "logger",
+              "method": "error",
+              "arguments": [
+                {
+                  "expressionType": "literal",
+                  "valueType": "string",
+                  "value": "Login form not found on page"
+                }
+              ]
+            },
+            {
+              "statementType": "return",
+              "value": {
+                "expressionType": "literal",
+                "valueType": "boolean",
+                "value": false
+              }
+            }
+          ]
+        },
+        {
+          "statementType": "methodCall",
+          "object": "logger",
+          "method": "info",
+          "arguments": [
+            {
+              "expressionType": "literal",
+              "valueType": "string",
+              "value": "Filling username field..."
+            }
+          ]
+        },
+        {
+          "statementType": "methodCall",
+          "object": "browser",
+          "method": "clearAndType",
+          "arguments": [
+            {
+              "expressionType": "literal",
+              "valueType": "string",
+              "value": "#username"
+            },
+            {
+              "expressionType": "variable",
+              "name": "username"
+            }
+          ]
+        },
+        {
+          "statementType": "methodCall",
+          "object": "browser",
+          "method": "wait",
+          "arguments": [
+            {
+              "expressionType": "literal",
+              "valueType": "integer",
+              "value": 500
+            }
+          ]
+        },
+        {
+          "statementType": "methodCall",
+          "object": "logger",
+          "method": "info",
+          "arguments": [
+            {
+              "expressionType": "literal",
+              "valueType": "string",
+              "value": "Filling password field..."
+            }
+          ]
+        },
+        {
+          "statementType": "methodCall",
+          "object": "browser",
+          "method": "clearAndType",
+          "arguments": [
+            {
+              "expressionType": "literal",
+              "valueType": "string",
+              "value": "#password"
+            },
+            {
+              "expressionType": "variable",
+              "name": "password"
+            }
+          ]
+        },
+        {
+          "statementType": "if",
+          "condition": {
+            "expressionType": "variable",
+            "name": "rememberMe"
+          },
+          "thenStatements": [
+            {
+              "statementType": "methodCall",
+              "object": "logger",
+              "method": "info",
+              "arguments": [
+                {
+                  "expressionType": "literal",
+                  "valueType": "string",
+                  "value": "Checking 'Remember Me' option..."
+                }
+              ]
+            },
+            {
+              "statementType": "variableDeclaration",
+              "variableName": "checkboxFound",
+              "variableType": "boolean",
+              "initialValue": {
+                "expressionType": "methodCall",
+                "object": "browser",
+                "method": "findElement",
+                "arguments": [
+                  {
+                    "expressionType": "literal",
+                    "valueType": "string",
+                    "value": "#remember-me"
+                  }
+                ]
+              }
+            },
+            {
+              "statementType": "if",
+              "condition": {
+                "expressionType": "variable",
+                "name": "checkboxFound"
+              },
+              "thenStatements": [
+                {
+                  "statementType": "methodCall",
+                  "object": "browser",
+                  "method": "click",
+                  "arguments": [
+                    {
+                      "expressionType": "literal",
+                      "valueType": "string",
+                      "value": "#remember-me"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "statementType": "methodCall",
+          "object": "browser",
+          "method": "wait",
+          "arguments": [
+            {
+              "expressionType": "literal",
+              "valueType": "integer",
+              "value": 500
+            }
+          ]
+        },
+        {
+          "statementType": "methodCall",
+          "object": "logger",
+          "method": "info",
+          "arguments": [
+            {
+              "expressionType": "literal",
+              "valueType": "string",
+              "value": "Clicking login button..."
+            }
+          ]
+        },
+        {
+          "statementType": "methodCall",
+          "object": "browser",
+          "method": "click",
+          "arguments": [
+            {
+              "expressionType": "literal",
+              "valueType": "string",
+              "value": "#login-button"
+            }
+          ]
+        },
+        {
+          "statementType": "methodCall",
+          "object": "browser",
+          "method": "wait",
+          "arguments": [
+            {
+              "expressionType": "literal",
+              "valueType": "integer",
+              "value": 2000
+            }
+          ]
+        },
+        {
+          "statementType": "variableDeclaration",
+          "variableName": "errorMessageVisible",
+          "variableType": "boolean",
+          "initialValue": {
+            "expressionType": "methodCall",
+            "object": "browser",
+            "method": "isVisible",
+            "arguments": [
+              {
+                "expressionType": "literal",
+                "valueType": "string",
+                "value": ".error-message"
+              }
+            ]
+          }
+        },
+        {
+          "statementType": "if",
+          "condition": {
+            "expressionType": "variable",
+            "name": "errorMessageVisible"
+          },
+          "thenStatements": [
+            {
+              "statementType": "variableDeclaration",
+              "variableName": "errorText",
+              "variableType": "string",
+              "initialValue": {
+                "expressionType": "methodCall",
+                "object": "browser",
+                "method": "getText",
+                "arguments": [
+                  {
+                    "expressionType": "literal",
+                    "valueType": "string",
+                    "value": ".error-message"
+                  }
+                ]
+              }
+            },
+            {
+              "statementType": "methodCall",
+              "object": "logger",
+              "method": "error",
+              "arguments": [
+                {
+                  "expressionType": "binaryOperation",
+                  "operator": "+",
+                  "left": {
+                    "expressionType": "literal",
+                    "valueType": "string",
+                    "value": "Login failed: "
+                  },
+                  "right": {
+                    "expressionType": "variable",
+                    "name": "errorText"
+                  }
+                }
+              ]
+            },
+            {
+              "statementType": "return",
+              "value": {
+                "expressionType": "literal",
+                "valueType": "boolean",
+                "value": false
+              }
+            }
+          ]
+        },
+        {
+          "statementType": "variableDeclaration",
+          "variableName": "dashboardFound",
+          "variableType": "boolean",
+          "initialValue": {
+            "expressionType": "methodCall",
+            "object": "browser",
+            "method": "waitForElement",
+            "arguments": [
+              {
+                "expressionType": "literal",
+                "valueType": "string",
+                "value": "#dashboard"
+              },
+              {
+                "expressionType": "literal",
+                "valueType": "integer",
+                "value": 5000
+              }
+            ]
+          }
+        },
+        {
+          "statementType": "if",
+          "condition": {
+            "expressionType": "variable",
+            "name": "dashboardFound"
+          },
+          "thenStatements": [
+            {
+              "statementType": "methodCall",
+              "object": "logger",
+              "method": "info",
+              "arguments": [
+                {
+                  "expressionType": "literal",
+                  "valueType": "string",
+                  "value": "Login successful! Dashboard loaded."
+                }
+              ]
+            },
+            {
+              "statementType": "return",
+              "value": {
+                "expressionType": "literal",
+                "valueType": "boolean",
+                "value": true
+              }
+            }
+          ],
+          "elseStatements": [
+            {
+              "statementType": "methodCall",
+              "object": "logger",
+              "method": "error",
+              "arguments": [
+                {
+                  "expressionType": "literal",
+                  "valueType": "string",
+                  "value": "Login failed: Dashboard not found after login"
+                }
+              ]
+            },
+            {
+              "statementType": "return",
+              "value": {
+                "expressionType": "literal",
+                "valueType": "boolean",
+                "value": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,260 @@
+{
+  "automation_functions": [
+    {
+      "id": 1,
+      "name": "filterAndProcess",
+      "description": "Filters items based on condition and processes valid ones",
+      "return_type": "integer",
+      "parameters": [
+        {
+          "name": "items",
+          "type": "array"
+        },
+        {
+          "name": "threshold",
+          "type": "integer"
+        }
+      ],
+      "statements": [
+        {
+          "statementType": "variableDeclaration",
+          "variableName": "validCount",
+          "variableType": "integer",
+          "initialValue": {
+            "expressionType": "literal",
+            "valueType": "integer",
+            "value": 0
+          }
+        },
+        {
+          "statementType": "variableDeclaration",
+          "variableName": "processedCount",
+          "variableType": "integer",
+          "initialValue": {
+            "expressionType": "literal",
+            "valueType": "integer",
+            "value": 0
+          }
+        },
+        {
+          "statementType": "forEach",
+          "variableName": "item",
+          "collection": {
+            "expressionType": "variable",
+            "name": "items"
+          },
+          "statements": [
+            {
+              "statementType": "variableDeclaration",
+              "variableName": "itemValue",
+              "variableType": "integer",
+              "initialValue": {
+                "expressionType": "methodCall",
+                "object": "item",
+                "method": "getValue",
+                "arguments": []
+              }
+            },
+            {
+              "statementType": "if",
+              "condition": {
+                "expressionType": "binaryOperation",
+                "operator": ">",
+                "left": {
+                  "expressionType": "variable",
+                  "name": "itemValue"
+                },
+                "right": {
+                  "expressionType": "variable",
+                  "name": "threshold"
+                }
+              },
+              "thenStatements": [
+                {
+                  "statementType": "assignment",
+                  "variableName": "validCount",
+                  "value": {
+                    "expressionType": "binaryOperation",
+                    "operator": "+",
+                    "left": {
+                      "expressionType": "variable",
+                      "name": "validCount"
+                    },
+                    "right": {
+                      "expressionType": "literal",
+                      "valueType": "integer",
+                      "value": 1
+                    }
+                  }
+                },
+                {
+                  "statementType": "methodCall",
+                  "object": "logger",
+                  "method": "info",
+                  "arguments": [
+                    {
+                      "expressionType": "literal",
+                      "valueType": "string",
+                      "value": "Item passed threshold check"
+                    }
+                  ]
+                },
+                {
+                  "statementType": "if",
+                  "condition": {
+                    "expressionType": "binaryOperation",
+                    "operator": "<",
+                    "left": {
+                      "expressionType": "variable",
+                      "name": "itemValue"
+                    },
+                    "right": {
+                      "expressionType": "binaryOperation",
+                      "operator": "*",
+                      "left": {
+                        "expressionType": "variable",
+                        "name": "threshold"
+                      },
+                      "right": {
+                        "expressionType": "literal",
+                        "valueType": "integer",
+                        "value": 2
+                      }
+                    }
+                  },
+                  "thenStatements": [
+                    {
+                      "statementType": "methodCall",
+                      "object": "processor",
+                      "method": "processNormal",
+                      "arguments": [
+                        {
+                          "expressionType": "variable",
+                          "name": "item"
+                        }
+                      ]
+                    },
+                    {
+                      "statementType": "assignment",
+                      "variableName": "processedCount",
+                      "value": {
+                        "expressionType": "binaryOperation",
+                        "operator": "+",
+                        "left": {
+                          "expressionType": "variable",
+                          "name": "processedCount"
+                        },
+                        "right": {
+                          "expressionType": "literal",
+                          "valueType": "integer",
+                          "value": 1
+                        }
+                      }
+                    }
+                  ],
+                  "elseStatements": [
+                    {
+                      "statementType": "methodCall",
+                      "object": "processor",
+                      "method": "processHigh",
+                      "arguments": [
+                        {
+                          "expressionType": "variable",
+                          "name": "item"
+                        }
+                      ]
+                    },
+                    {
+                      "statementType": "assignment",
+                      "variableName": "processedCount",
+                      "value": {
+                        "expressionType": "binaryOperation",
+                        "operator": "+",
+                        "left": {
+                          "expressionType": "variable",
+                          "name": "processedCount"
+                        },
+                        "right": {
+                          "expressionType": "literal",
+                          "valueType": "integer",
+                          "value": 1
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "elseStatements": [
+                {
+                  "statementType": "methodCall",
+                  "object": "logger",
+                  "method": "warn",
+                  "arguments": [
+                    {
+                      "expressionType": "literal",
+                      "valueType": "string",
+                      "value": "Item below threshold, skipping"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "statementType": "methodCall",
+          "object": "logger",
+          "method": "info",
+          "arguments": [
+            {
+              "expressionType": "binaryOperation",
+              "operator": "+",
+              "left": {
+                "expressionType": "binaryOperation",
+                "operator": "+",
+                "left": {
+                  "expressionType": "literal",
+                  "valueType": "string",
+                  "value": "Processed "
+                },
+                "right": {
+                  "expressionType": "variable",
+                  "name": "processedCount"
+                }
+              },
+              "right": {
+                "expressionType": "binaryOperation",
+                "operator": "+",
+                "left": {
+                  "expressionType": "literal",
+                  "valueType": "string",
+                  "value": " out of "
+                },
+                "right": {
+                  "expressionType": "binaryOperation",
+                  "operator": "+",
+                  "left": {
+                    "expressionType": "variable",
+                    "name": "validCount"
+                  },
+                  "right": {
+                    "expressionType": "literal",
+                    "valueType": "string",
+                    "value": " valid items"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "statementType": "return",
+          "value": {
+            "expressionType": "variable",
+            "name": "processedCount"
+          }
+        }
+      ]
+    }
+  ]
+}

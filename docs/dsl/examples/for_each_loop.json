@@ -1,0 +1,148 @@
+{
+  "automation_functions": [
+    {
+      "id": 1,
+      "name": "processItems",
+      "description": "Processes each item in a list and counts successes",
+      "return_type": "integer",
+      "parameters": [
+        {
+          "name": "items",
+          "type": "array"
+        }
+      ],
+      "statements": [
+        {
+          "statementType": "variableDeclaration",
+          "variableName": "processedCount",
+          "variableType": "integer",
+          "initialValue": {
+            "expressionType": "literal",
+            "valueType": "integer",
+            "value": 0
+          }
+        },
+        {
+          "statementType": "methodCall",
+          "object": "logger",
+          "method": "info",
+          "arguments": [
+            {
+              "expressionType": "literal",
+              "valueType": "string",
+              "value": "Starting to process items..."
+            }
+          ]
+        },
+        {
+          "statementType": "forEach",
+          "variableName": "item",
+          "collection": {
+            "expressionType": "variable",
+            "name": "items"
+          },
+          "statements": [
+            {
+              "statementType": "methodCall",
+              "object": "logger",
+              "method": "info",
+              "arguments": [
+                {
+                  "expressionType": "binaryOperation",
+                  "operator": "+",
+                  "left": {
+                    "expressionType": "literal",
+                    "valueType": "string",
+                    "value": "Processing item: "
+                  },
+                  "right": {
+                    "expressionType": "variable",
+                    "name": "item"
+                  }
+                }
+              ]
+            },
+            {
+              "statementType": "variableDeclaration",
+              "variableName": "success",
+              "variableType": "boolean",
+              "initialValue": {
+                "expressionType": "methodCall",
+                "object": "processor",
+                "method": "handle",
+                "arguments": [
+                  {
+                    "expressionType": "variable",
+                    "name": "item"
+                  }
+                ]
+              }
+            },
+            {
+              "statementType": "if",
+              "condition": {
+                "expressionType": "variable",
+                "name": "success"
+              },
+              "thenStatements": [
+                {
+                  "statementType": "assignment",
+                  "variableName": "processedCount",
+                  "value": {
+                    "expressionType": "binaryOperation",
+                    "operator": "+",
+                    "left": {
+                      "expressionType": "variable",
+                      "name": "processedCount"
+                    },
+                    "right": {
+                      "expressionType": "literal",
+                      "valueType": "integer",
+                      "value": 1
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "statementType": "methodCall",
+          "object": "logger",
+          "method": "info",
+          "arguments": [
+            {
+              "expressionType": "binaryOperation",
+              "operator": "+",
+              "left": {
+                "expressionType": "literal",
+                "valueType": "string",
+                "value": "Successfully processed "
+              },
+              "right": {
+                "expressionType": "binaryOperation",
+                "operator": "+",
+                "left": {
+                  "expressionType": "variable",
+                  "name": "processedCount"
+                },
+                "right": {
+                  "expressionType": "literal",
+                  "valueType": "string",
+                  "value": " items"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "statementType": "return",
+          "value": {
+            "expressionType": "variable",
+            "name": "processedCount"
+          }
+        }
+      ]
+    }
+  ]
+}

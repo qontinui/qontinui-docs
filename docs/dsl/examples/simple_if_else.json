@@ -1,0 +1,97 @@
+{
+  "automation_functions": [
+    {
+      "id": 1,
+      "name": "checkAge",
+      "description": "Determines if a person is an adult or minor based on age",
+      "return_type": "string",
+      "parameters": [
+        {
+          "name": "age",
+          "type": "integer"
+        }
+      ],
+      "statements": [
+        {
+          "statementType": "variableDeclaration",
+          "variableName": "result",
+          "variableType": "string",
+          "initialValue": {
+            "expressionType": "literal",
+            "valueType": "string",
+            "value": ""
+          }
+        },
+        {
+          "statementType": "if",
+          "condition": {
+            "expressionType": "binaryOperation",
+            "operator": ">=",
+            "left": {
+              "expressionType": "variable",
+              "name": "age"
+            },
+            "right": {
+              "expressionType": "literal",
+              "valueType": "integer",
+              "value": 18
+            }
+          },
+          "thenStatements": [
+            {
+              "statementType": "assignment",
+              "variableName": "result",
+              "value": {
+                "expressionType": "literal",
+                "valueType": "string",
+                "value": "adult"
+              }
+            },
+            {
+              "statementType": "methodCall",
+              "object": "logger",
+              "method": "info",
+              "arguments": [
+                {
+                  "expressionType": "literal",
+                  "valueType": "string",
+                  "value": "Person is an adult"
+                }
+              ]
+            }
+          ],
+          "elseStatements": [
+            {
+              "statementType": "assignment",
+              "variableName": "result",
+              "value": {
+                "expressionType": "literal",
+                "valueType": "string",
+                "value": "minor"
+              }
+            },
+            {
+              "statementType": "methodCall",
+              "object": "logger",
+              "method": "info",
+              "arguments": [
+                {
+                  "expressionType": "literal",
+                  "valueType": "string",
+                  "value": "Person is a minor"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "statementType": "return",
+          "value": {
+            "expressionType": "variable",
+            "name": "result"
+          }
+        }
+      ]
+    }
+  ]
+}
