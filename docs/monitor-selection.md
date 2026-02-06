@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Multi-Monitor Support'
+sidebar_label: "Multi-Monitor Support"
 sidebar_position: 3
 ---
 
@@ -10,6 +10,7 @@ Qontinui Runner provides comprehensive multi-monitor support, allowing you to ru
 ## Overview
 
 The monitor selection feature enables:
+
 - **Dynamic detection** of all connected monitors
 - **Selection** of which monitor to run automation on
 - **Coordinate conversion** between monitor-relative and global coordinates
@@ -61,6 +62,7 @@ class MonitorManager:
 ```
 
 **Key Features:**
+
 - Maintains monitor cache with position and size
 - Converts between coordinate systems
 - Handles negative coordinates for left-side monitors
@@ -73,11 +75,11 @@ The UI provides monitor selection with dynamic detection:
 ```javascript
 // src/App.tsx
 const detectSystemMonitors = async () => {
-    const result = await invoke("get_monitors");
-    if (result.success && result.data) {
-        setAvailableMonitors(result.data.indices);
-        addLog("info", `Detected ${result.data.count} monitor(s)`);
-    }
+  const result = await invoke("get_monitors");
+  if (result.success && result.data) {
+    setAvailableMonitors(result.data.indices);
+    addLog("info", `Detected ${result.data.count} monitor(s)`);
+  }
 };
 ```
 
@@ -86,6 +88,7 @@ const detectSystemMonitors = async () => {
 ### Monitor Selection UI
 
 The interface shows:
+
 - **Monitor dropdown** with all detected monitors
 - **Primary indicator** for Monitor 0
 - **Count display** showing total monitors detected
@@ -137,6 +140,7 @@ Monitor Layout Example:
 ```
 
 The MonitorManager handles conversions:
+
 - **Global → Monitor**: Subtract monitor's top-left position
 - **Monitor → Global**: Add monitor's top-left position
 
@@ -198,16 +202,19 @@ console.log("Selected monitor:", selectedMonitor);
 ## Platform Considerations
 
 ### Windows
+
 - Full multi-monitor support
 - Handles different DPI scales per monitor
 - Negative coordinates for left-side monitors
 
 ### macOS
+
 - Supports Retina displays
 - Menu bar affects coordinate calculations
 - Spaces/Mission Control may interfere
 
 ### Linux
+
 - Requires X11 or Wayland
 - DISPLAY environment variable must be set
 - Virtual desktops treated as single monitor

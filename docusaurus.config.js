@@ -4,57 +4,55 @@
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
-import {themes as prismThemes} from 'prism-react-renderer';
+import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Qontinui Documentation',
-  tagline: 'Model-based GUI automation with AI-enhanced perception',
-  favicon: 'img/favicon.ico',
+  title: "Qontinui Documentation",
+  tagline: "Model-based GUI automation with AI-enhanced perception",
+  favicon: "img/favicon.ico",
 
   // Set the production url of your site here
-  url: 'https://qontinui.github.io',
+  url: "https://qontinui.github.io",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: "/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'qontinui', // Usually your GitHub org/user name.
-  projectName: 'qontinui-docs', // Usually your repo name.
+  organizationName: "qontinui", // Usually your GitHub org/user name.
+  projectName: "qontinui-docs", // Usually your repo name.
 
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"],
   },
 
   presets: [
     [
-      'classic',
+      "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: './sidebars.js',
+          sidebarPath: "./sidebars.js",
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/qontinui/qontinui-docs/tree/main/',
+          editUrl: "https://github.com/qontinui/qontinui-docs/tree/main/",
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/qontinui/qontinui-docs/tree/main/',
+          editUrl: "https://github.com/qontinui/qontinui-docs/tree/main/",
         },
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: "./src/css/custom.css",
         },
       }),
     ],
@@ -64,75 +62,75 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/qontinui-social-card.jpg',
+      image: "img/qontinui-social-card.jpg",
       navbar: {
-        title: 'Qontinui',
+        title: "Qontinui",
         logo: {
-          alt: 'Qontinui Logo',
-          src: 'img/logo.svg',
+          alt: "Qontinui Logo",
+          src: "img/logo.svg",
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Documentation',
+            type: "docSidebar",
+            sidebarId: "tutorialSidebar",
+            position: "left",
+            label: "Documentation",
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          { to: "/blog", label: "Blog", position: "left" },
           {
-            href: 'https://github.com/qontinui/qontinui-core',
-            label: 'GitHub',
-            position: 'right',
+            href: "https://github.com/qontinui/qontinui-core",
+            label: "GitHub",
+            position: "right",
           },
         ],
       },
       footer: {
-        style: 'dark',
+        style: "dark",
         links: [
           {
-            title: 'Docs',
+            title: "Docs",
             items: [
               {
-                label: 'Getting Started',
-                to: '/docs/intro',
+                label: "Getting Started",
+                to: "/docs/intro",
               },
               {
-                label: 'API Reference',
-                to: '/docs/api',
+                label: "API Reference",
+                to: "/docs/api",
               },
               {
-                label: 'Migration from Brobot',
-                to: '/docs/migration',
+                label: "Migration from Brobot",
+                to: "/docs/migration",
               },
             ],
           },
           {
-            title: 'Community',
+            title: "Community",
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/qontinui',
+                label: "Stack Overflow",
+                href: "https://stackoverflow.com/questions/tagged/qontinui",
               },
               {
-                label: 'Discord',
-                href: 'https://discord.gg/qontinui',
+                label: "Discord",
+                href: "https://discord.gg/qontinui",
               },
               {
-                label: 'Twitter',
-                href: 'https://twitter.com/qontinui',
+                label: "Twitter",
+                href: "https://twitter.com/qontinui",
               },
             ],
           },
           {
-            title: 'More',
+            title: "More",
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
+                label: "Blog",
+                to: "/blog",
               },
               {
-                label: 'GitHub',
-                href: 'https://github.com/qontinui',
+                label: "GitHub",
+                href: "https://github.com/qontinui",
               },
             ],
           },
@@ -142,7 +140,7 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        additionalLanguages: ['python', 'rust', 'bash'],
+        additionalLanguages: ["python", "rust", "bash"],
       },
     }),
 };

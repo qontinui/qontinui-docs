@@ -29,6 +29,7 @@ The Qontinui DSL is a JSON-based language that lets you define automation workfl
 Let's start with the simplest possible automation - one that just logs a message.
 
 **hello_world.json:**
+
 ```json
 {
   "automation_functions": [
@@ -87,6 +88,7 @@ executor.execute("helloWorld")
 Variables store data. Every variable has a type.
 
 **example_variables.json:**
+
 ```json
 {
   "automation_functions": [
@@ -145,6 +147,7 @@ Variables store data. Every variable has a type.
 ```
 
 **Key Points:**
+
 - Declare variables with `variableDeclaration`
 - Specify the type: `string`, `integer`, `boolean`, `double`
 - Optionally provide an initial value
@@ -179,6 +182,7 @@ Expressions calculate values. Let's do some math!
 This creates a variable `total` with value `30` (10 + 20).
 
 **Supported Operators:**
+
 - Arithmetic: `+`, `-`, `*`, `/`, `%`
 - Comparison: `==`, `!=`, `<`, `>`, `<=`, `>=`
 - Logical: `&&` (AND), `||` (OR)
@@ -398,6 +402,7 @@ Iterate over a collection of items:
 ```
 
 **How It Works:**
+
 1. Takes each element from `items`
 2. Assigns it to loop variable `item`
 3. Executes the statements in the loop body
@@ -935,6 +940,7 @@ Construct complex objects fluently:
 ### 1. Use Descriptive Names
 
 **Bad:**
+
 ```json
 {
   "variableName": "x",
@@ -943,6 +949,7 @@ Construct complex objects fluently:
 ```
 
 **Good:**
+
 ```json
 {
   "variableName": "userName",
@@ -1221,6 +1228,7 @@ Indent properly and align brackets:
 **Error:** `Unexpected token at position 123`
 
 **Solution:** Validate your JSON:
+
 - Check for missing commas
 - Ensure all brackets are closed
 - Use a JSON validator tool
@@ -1259,6 +1267,7 @@ Now that you've learned the basics, here's what to explore next:
 ## Quick Reference
 
 ### Statement Types
+
 - `variableDeclaration` - Declare a variable
 - `assignment` - Assign to a variable
 - `if` - Conditional execution
@@ -1267,6 +1276,7 @@ Now that you've learned the basics, here's what to explore next:
 - `methodCall` - Call a method
 
 ### Expression Types
+
 - `literal` - Constant value
 - `variable` - Variable reference
 - `methodCall` - Method invocation
@@ -1274,6 +1284,7 @@ Now that you've learned the basics, here's what to explore next:
 - `builder` - Builder pattern
 
 ### Types
+
 - `boolean` - true/false
 - `string` - Text
 - `integer` - Whole numbers
@@ -1283,6 +1294,7 @@ Now that you've learned the basics, here's what to explore next:
 - `array` - Collections
 
 ### Operators
+
 - Arithmetic: `+`, `-`, `*`, `/`, `%`
 - Comparison: `==`, `!=`, `<`, `>`, `<=`, `>=`
 - Logical: `&&`, `||`

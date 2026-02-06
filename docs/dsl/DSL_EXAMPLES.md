@@ -62,12 +62,14 @@ The simplest possible DSL script that prints a greeting.
 ```
 
 **Explanation:**
+
 - Creates a function named `helloWorld` with no parameters
 - Uses `methodCall` to invoke `logger.info()`
 - Passes a string literal as the message
 - Returns nothing (`void` return type)
 
 **Expected Output:**
+
 ```
 INFO: Hello, World!
 ```
@@ -157,18 +159,21 @@ Performs arithmetic operations and returns the result.
 ```
 
 **Explanation:**
+
 - Takes two integer parameters `a` and `b`
 - Declares a variable `result` and initializes it with `a + b`
 - Logs the result
 - Returns the sum as an integer
 
 **Usage:**
+
 ```python
 result = executor.execute("add", [5, 3])
 # result = 8
 ```
 
 **Expected Output:**
+
 ```
 INFO: Sum: 8
 ```
@@ -260,12 +265,14 @@ Validates input and returns a boolean result.
 ```
 
 **Explanation:**
+
 - Checks if email is not empty
 - Checks if email contains "@" symbol
 - Returns true only if both conditions are met
 - Uses logical AND (`&&`) to combine conditions
 
 **Usage:**
+
 ```python
 valid = executor.execute("isValidEmail", ["user@example.com"])
 # valid = True
@@ -435,12 +442,14 @@ Uses if/else statements to determine letter grades.
 ```
 
 **Explanation:**
+
 - Initializes grade to "F" (default)
 - Uses nested if-else to check score ranges
 - Assigns appropriate letter grade
 - Returns the grade string
 
 **Usage:**
+
 ```python
 grade = executor.execute("calculateGrade", [85])
 # grade = "B"
@@ -455,6 +464,7 @@ Simulates a login process with validation.
 See: [examples/user_auth.json](examples/user_auth.json)
 
 **Explanation:**
+
 - Validates username and password are not empty
 - Checks credentials against expected values
 - Logs success or failure
@@ -553,18 +563,21 @@ Processes a list of numbers and calculates statistics.
 ```
 
 **Explanation:**
+
 - Initializes sum to 0
 - Iterates over each number in the list
 - Adds each number to the running sum
 - Logs and returns the total
 
 **Usage:**
+
 ```python
 total = executor.execute("calculateSum", [[1, 2, 3, 4, 5]])
 # total = 15
 ```
 
 **Expected Output:**
+
 ```
 INFO: Sum: 15
 ```
@@ -659,12 +672,14 @@ Counts how many items match a condition.
 ```
 
 **Explanation:**
+
 - Initializes counter to 0
 - Loops through each number
 - If number is positive, increments counter
 - Returns the final count
 
 **Usage:**
+
 ```python
 positive_count = executor.execute("countPositive", [[-3, 5, -1, 8, 0, 2]])
 # positive_count = 3
@@ -681,12 +696,14 @@ Automates filling out a web form with validation.
 See: [examples/form_filling.json](examples/form_filling.json)
 
 **Explanation:**
+
 - Validates all required fields are provided
 - Fills each form field sequentially
 - Submits the form
 - Returns success/failure status
 
 **Usage:**
+
 ```python
 data = {
     "firstName": "John",
@@ -706,6 +723,7 @@ Extracts data from multiple elements on a page.
 See: [examples/data_extraction.json](examples/data_extraction.json)
 
 **Explanation:**
+
 - Iterates over a list of product elements
 - Extracts name and price from each
 - Stores in a results array
@@ -720,6 +738,7 @@ A complete workflow with multiple stages.
 See: [examples/workflow.json](examples/workflow.json)
 
 **Explanation:**
+
 - Performs login
 - Navigates to specific page
 - Performs actions
@@ -930,12 +949,14 @@ Implements complex decision-making logic.
 ```
 
 **Explanation:**
+
 - Applies different discount rules based on customer type
 - Applies additional discount if conditions are met
 - Validates final amount is positive
 - Returns order status
 
 **Usage:**
+
 ```python
 status = executor.execute("processOrder", [150.0, "premium", True])
 # status = "approved"
@@ -1003,13 +1024,31 @@ Log key steps for debugging:
 ```json
 {
   "statements": [
-    {"statementType": "methodCall", "object": "logger", "method": "info",
-     "arguments": [{"expressionType": "literal", "valueType": "string",
-                   "value": "Starting process..."}]},
+    {
+      "statementType": "methodCall",
+      "object": "logger",
+      "method": "info",
+      "arguments": [
+        {
+          "expressionType": "literal",
+          "valueType": "string",
+          "value": "Starting process..."
+        }
+      ]
+    },
     // ... do work ...
-    {"statementType": "methodCall", "object": "logger", "method": "info",
-     "arguments": [{"expressionType": "literal", "valueType": "string",
-                   "value": "Process complete"}]}
+    {
+      "statementType": "methodCall",
+      "object": "logger",
+      "method": "info",
+      "arguments": [
+        {
+          "expressionType": "literal",
+          "valueType": "string",
+          "value": "Process complete"
+        }
+      ]
+    }
   ]
 }
 ```
@@ -1026,11 +1065,27 @@ Consider boundary conditions:
       "condition": {
         "expressionType": "binaryOperation",
         "operator": "==",
-        "left": {"expressionType": "methodCall", "object": "list", "method": "size", "arguments": []},
-        "right": {"expressionType": "literal", "valueType": "integer", "value": 0}
+        "left": {
+          "expressionType": "methodCall",
+          "object": "list",
+          "method": "size",
+          "arguments": []
+        },
+        "right": {
+          "expressionType": "literal",
+          "valueType": "integer",
+          "value": 0
+        }
       },
       "thenStatements": [
-        {"statementType": "return", "value": {"expressionType": "literal", "valueType": "string", "value": "empty"}}
+        {
+          "statementType": "return",
+          "value": {
+            "expressionType": "literal",
+            "valueType": "string",
+            "value": "empty"
+          }
+        }
       ]
     }
   ]
@@ -1042,6 +1097,7 @@ Consider boundary conditions:
 ### Minimize Method Calls in Loops
 
 **Less Efficient:**
+
 ```json
 {
   "statementType": "forEach",
@@ -1054,6 +1110,7 @@ Consider boundary conditions:
 ```
 
 **More Efficient:**
+
 ```json
 {
   "statements": [
@@ -1077,8 +1134,8 @@ Use `&&` and `||` effectively:
   "left": {
     "expressionType": "binaryOperation",
     "operator": "!=",
-    "left": {"expressionType": "variable", "name": "obj"},
-    "right": {"expressionType": "literal", "valueType": "null", "value": null}
+    "left": { "expressionType": "variable", "name": "obj" },
+    "right": { "expressionType": "literal", "valueType": "null", "value": null }
   },
   "right": {
     // This won't execute if obj is null

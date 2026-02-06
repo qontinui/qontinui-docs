@@ -69,16 +69,19 @@ The `examples/` directory contains working JSON files you can run:
 ### 1. Choose Your Learning Path
 
 **Path A: Tutorial First (Recommended for Beginners)**
+
 ```
 DSL_TUTORIAL.md → Run examples/ → DSL_EXAMPLES.md → DSL_SPECIFICATION.md
 ```
 
 **Path B: Examples First (For Experienced Developers)**
+
 ```
 DSL_EXAMPLES.md → examples/ → DSL_SPECIFICATION.md → DSL_TUTORIAL.md
 ```
 
 **Path C: Specification First (For Language Designers)**
+
 ```
 DSL_SPECIFICATION.md → DSL_EXAMPLES.md → examples/ → DSL_TUTORIAL.md
 ```
@@ -147,26 +150,34 @@ Compute values:
 ## Common Use Cases
 
 ### 1. Form Automation
+
 See: `examples/complex_automation.json`
+
 - Input validation
 - Field filling
 - Form submission
 - Error checking
 
 ### 2. Data Processing
+
 See: `examples/variable_manipulation.json`
+
 - Statistical calculations
 - Data transformation
 - Aggregation
 
 ### 3. Conditional Logic
+
 See: `examples/nested_control_flow.json`
+
 - Filtering
 - Branching logic
 - Complex decisions
 
 ### 4. Iteration
+
 See: `examples/for_each_loop.json`
+
 - List processing
 - Batch operations
 - Counting and accumulation
@@ -174,22 +185,26 @@ See: `examples/for_each_loop.json`
 ## Language Features
 
 ### Type System
+
 - `boolean`, `string`, `integer`, `double`
 - `void` (for functions)
 - `object`, `array` (for complex data)
 
 ### Operators
+
 - Arithmetic: `+`, `-`, `*`, `/`, `%`
 - Comparison: `==`, `!=`, `<`, `>`, `<=`, `>=`
 - Logical: `&&`, `||`
 
 ### Control Flow
+
 - If/else statements
 - ForEach loops
 - Early return
 - Nested scoping
 
 ### Advanced Features
+
 - Builder pattern for complex objects
 - Method chaining
 - Variable scoping
@@ -198,26 +213,31 @@ See: `examples/for_each_loop.json`
 ## Best Practices
 
 ### 1. Naming
+
 - Use `camelCase` for functions and variables
 - Choose descriptive names
 - Avoid abbreviations
 
 ### 2. Organization
+
 - One function per logical task
 - Small, focused functions
 - Clear parameter names
 
 ### 3. Documentation
+
 - Always include descriptions
 - Explain complex logic
 - Document return values
 
 ### 4. Error Handling
+
 - Validate inputs early
 - Check for null/empty values
 - Return meaningful error states
 
 ### 5. Performance
+
 - Minimize operations in loops
 - Use short-circuit evaluation
 - Cache expensive computations

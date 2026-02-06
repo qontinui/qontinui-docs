@@ -19,21 +19,25 @@ Qontinui is a Python-based framework designed to revolutionize GUI automation by
 ## Key Features
 
 ### 🤖 Intelligent Element Detection
+
 - Automatic UI segmentation using computer vision
 - Semantic understanding of UI elements
 - Robust to UI changes and variations
 
 ### 🎯 Smart State Management
+
 - Hybrid state machine with probabilistic activation
 - Multi-state awareness
 - Automatic state discovery
 
 ### 📝 Declarative DSL
+
 - Human-readable automation scripts
 - State and transition definitions
 - Built-in assertions and control flow
 
 ### 🔄 Easy Migration
+
 - Convert existing Brobot applications
 - Preserve test assets and patterns
 - Gradual migration path
@@ -102,6 +106,7 @@ segments = segmenter.segment_screen(screenshot)
 ### Problems with Traditional Automation
 
 Traditional GUI automation tools suffer from:
+
 - **Brittleness**: Small UI changes break tests
 - **Maintenance Burden**: Constant updates needed
 - **Limited Intelligence**: No understanding of UI semantics
@@ -110,6 +115,7 @@ Traditional GUI automation tools suffer from:
 ### The Qontinui Solution
 
 Qontinui addresses these challenges through:
+
 - **Semantic Understanding**: AI models understand UI meaning
 - **Adaptive Detection**: Robust to visual changes
 - **Smart State Management**: Automatic state tracking
@@ -140,6 +146,7 @@ Qontinui provides a powerful JSON-based DSL for defining automation workflows de
 - **[DSL Examples](dsl/DSL_EXAMPLES)** - Real-world automation scenarios
 
 The DSL allows you to:
+
 - Write automation without Python code
 - Define reusable functions with parameters
 - Use control flow (if/else, loops)

@@ -33,20 +33,23 @@ print(Key.ESCAPE.value) # "escape"
 ### Available Keys
 
 #### Navigation Keys
+
 - `ENTER` - "\n"
-- `RETURN` - "\r"  
+- `RETURN` - "\r"
 - `TAB` - "\t"
 - `SPACE` - " "
 - `BACKSPACE` - "\b"
 - `DELETE` - "delete"
 
 #### Arrow Keys
+
 - `UP` - "up"
 - `DOWN` - "down"
 - `LEFT` - "left"
 - `RIGHT` - "right"
 
 #### Modifier Keys
+
 - `SHIFT` - "shift"
 - `CTRL` / `CONTROL` - "ctrl"
 - `ALT` - "alt"
@@ -55,9 +58,11 @@ print(Key.ESCAPE.value) # "escape"
 - `CMD` - "cmd" (Mac Command key)
 
 #### Function Keys
+
 - `F1` through `F15`
 
 #### Navigation Cluster
+
 - `HOME` - "home"
 - `END` - "end"
 - `PAGE_UP` - "pageup"
@@ -65,6 +70,7 @@ print(Key.ESCAPE.value) # "escape"
 - `INSERT` - "insert"
 
 #### Special Keys
+
 - `ESC` / `ESCAPE` - "escape"
 - `PRINT_SCREEN` - "printscreen"
 - `SCROLL_LOCK` - "scrolllock"
@@ -74,6 +80,7 @@ print(Key.ESCAPE.value) # "escape"
 - `NUM_LOCK` - "numlock"
 
 #### Numpad Keys
+
 - `NUM0` through `NUM9`
 - `NUM_MULTIPLY` - "multiply"
 - `NUM_ADD` - "add"
@@ -82,11 +89,13 @@ print(Key.ESCAPE.value) # "escape"
 - `NUM_DIVIDE` - "divide"
 
 #### Media Keys
+
 - `VOLUME_UP`, `VOLUME_DOWN`, `VOLUME_MUTE`
 - `MEDIA_PLAY_PAUSE`, `MEDIA_STOP`
 - `MEDIA_NEXT_TRACK`, `MEDIA_PREV_TRACK`
 
 #### Browser Control Keys
+
 - `BROWSER_BACK`, `BROWSER_FORWARD`
 - `BROWSER_REFRESH`, `BROWSER_STOP`
 - `BROWSER_SEARCH`, `BROWSER_FAVORITES`, `BROWSER_HOME`
@@ -273,21 +282,22 @@ print(combo2)  # "ctrl+s"
 
 If you're migrating from SikuliX/Brobot, the key mappings are designed to be familiar:
 
-| SikuliX/Brobot | Qontinui |
-|----------------|----------|
-| `Key.ENTER` | `Key.ENTER` |
-| `Key.TAB` | `Key.TAB` |
-| `Key.ESC` | `Key.ESC` or `Key.ESCAPE` |
-| `Key.F1` | `Key.F1` |
-| `Key.CTRL` | `Key.CTRL` |
-| `Key.ALT` | `Key.ALT` |
-| `Key.SHIFT` | `Key.SHIFT` |
+| SikuliX/Brobot | Qontinui                  |
+| -------------- | ------------------------- |
+| `Key.ENTER`    | `Key.ENTER`               |
+| `Key.TAB`      | `Key.TAB`                 |
+| `Key.ESC`      | `Key.ESC` or `Key.ESCAPE` |
+| `Key.F1`       | `Key.F1`                  |
+| `Key.CTRL`     | `Key.CTRL`                |
+| `Key.ALT`      | `Key.ALT`                 |
+| `Key.SHIFT`    | `Key.SHIFT`               |
 
 The main difference is that Qontinui's implementation doesn't require SikuliX as a dependency, making it lighter and more portable.
 
 ## Implementation Details
 
 The Key enum implementation:
+
 - Uses Python's built-in `enum.Enum`
 - Provides string values that work with underlying automation libraries (pyautogui, pynput)
 - Includes helper methods for key classification
