@@ -23,6 +23,9 @@ yarn-error.log*
 # Editor
 .vscode/
 .idea/
+
+# Claude Code local settings
+.claude/
 *.swp
 *.swo
 *~
