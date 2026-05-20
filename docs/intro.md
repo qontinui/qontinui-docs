@@ -6,6 +6,8 @@ sidebar_position: 1
 
 Qontinui is a next-generation GUI automation framework that combines model-based testing with AI-enhanced perception for robust and intelligent automation.
 
+New here and not sure which setup fits you? See [The Three Tiers](tiers) — local-only, bring-your-own API key, or signed in to Qontinui for multi-machine coordination.
+
 ## What is Qontinui?
 
 Qontinui is a Python-based framework designed to revolutionize GUI automation by:
