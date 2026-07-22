@@ -1,3 +1,8 @@
+---
+sidebar_label: "Keyboard Keys"
+sidebar_position: 4
+---
+
 # Keyboard Keys and Special Strings
 
 Qontinui provides enums for special keyboard keys that cannot be typed directly as strings, similar to SikuliX's Key class. This allows for robust keyboard automation without requiring SikuliX as a dependency.

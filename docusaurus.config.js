@@ -10,7 +10,7 @@ import { themes as prismThemes } from "prism-react-renderer";
 const config = {
   title: "Qontinui Documentation",
   tagline: "Model-based GUI automation with AI-enhanced perception",
-  favicon: "img/favicon.ico",
+  favicon: "img/favicon.png",
 
   // Set the production url of your site here
   url: "https://qontinui.github.io",
@@ -24,7 +24,13 @@ const config = {
   projectName: "qontinui-docs", // Usually your repo name.
 
   onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
+
+  markdown: {
+    hooks: {
+      // Top-level `onBrokenMarkdownLinks` is deprecated and removed in v4.
+      onBrokenMarkdownLinks: "warn",
+    },
+  },
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -41,16 +47,13 @@ const config = {
       ({
         docs: {
           sidebarPath: "./sidebars.js",
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
+          routeBasePath: "/",
           editUrl: "https://github.com/qontinui/qontinui-docs/tree/main/",
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl: "https://github.com/qontinui/qontinui-docs/tree/main/",
-        },
+        // No blog: this repo has no posts, and the preset's blog plugin fails
+        // the build when its content directory is absent. Re-enable by setting
+        // this to an options object once a `blog/` directory exists.
+        blog: false,
         theme: {
           customCss: "./src/css/custom.css",
         },
@@ -61,13 +64,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Replace with your project's social card
-      image: "img/qontinui-social-card.jpg",
+      image: "img/logo.png",
       navbar: {
         title: "Qontinui",
         logo: {
           alt: "Qontinui Logo",
-          src: "img/logo.svg",
+          src: "img/logo.png",
         },
         items: [
           {
@@ -76,9 +78,8 @@ const config = {
             position: "left",
             label: "Documentation",
           },
-          { to: "/blog", label: "Blog", position: "left" },
           {
-            href: "https://github.com/qontinui/qontinui-core",
+            href: "https://github.com/qontinui/qontinui",
             label: "GitHub",
             position: "right",
           },
@@ -86,38 +87,41 @@ const config = {
       },
       footer: {
         style: "dark",
+        // Every `to:` here must resolve to a real page — `onBrokenLinks: "throw"`
+        // fails the build otherwise, which is what these links previously did
+        // (`/docs/api` and `/docs/migration` were never authored).
         links: [
           {
             title: "Docs",
             items: [
               {
-                label: "Getting Started",
-                to: "/docs/intro",
+                label: "Introduction",
+                to: "/",
               },
               {
-                label: "API Reference",
-                to: "/docs/api",
+                label: "The Three Tiers",
+                to: "/tiers",
               },
               {
-                label: "Migration from Brobot",
-                to: "/docs/migration",
+                label: "DSL Reference",
+                to: "/dsl/",
               },
             ],
           },
           {
-            title: "Community",
+            title: "Project",
             items: [
               {
-                label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/qontinui",
+                label: "Core library",
+                href: "https://github.com/qontinui/qontinui",
               },
               {
-                label: "Discord",
-                href: "https://discord.gg/qontinui",
+                label: "Runner",
+                href: "https://github.com/qontinui/qontinui-runner",
               },
               {
-                label: "Twitter",
-                href: "https://twitter.com/qontinui",
+                label: "Issues",
+                href: "https://github.com/qontinui/qontinui/issues",
               },
             ],
           },
@@ -125,12 +129,12 @@ const config = {
             title: "More",
             items: [
               {
-                label: "Blog",
-                to: "/blog",
+                label: "GitHub organization",
+                href: "https://github.com/qontinui",
               },
               {
-                label: "GitHub",
-                href: "https://github.com/qontinui",
+                label: "Contributing",
+                href: "https://github.com/qontinui/qontinui-docs/blob/main/CONTRIBUTING.md",
               },
             ],
           },

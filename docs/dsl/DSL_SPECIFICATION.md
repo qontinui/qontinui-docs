@@ -1,3 +1,8 @@
+---
+sidebar_label: "Specification"
+sidebar_position: 2
+---
+
 # Qontinui DSL Specification
 
 ## Overview

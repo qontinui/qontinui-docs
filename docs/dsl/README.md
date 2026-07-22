@@ -1,3 +1,8 @@
+---
+sidebar_label: "Overview"
+sidebar_position: 1
+---
+
 # Qontinui DSL Documentation
 
 Complete documentation for the Qontinui Domain-Specific Language (DSL).

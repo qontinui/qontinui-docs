@@ -1,3 +1,8 @@
+---
+sidebar_label: "Tutorial"
+sidebar_position: 3
+---
+
 # Qontinui DSL Tutorial
 
 ## Introduction

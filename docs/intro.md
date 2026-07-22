@@ -1,4 +1,5 @@
 ---
+slug: /
 sidebar_position: 1
 ---
 
@@ -133,11 +134,10 @@ Qontinui addresses these challenges through:
 
 ## Next Steps
 
-- [Installation Guide](getting-started/installation) - Set up Qontinui
-- [Quick Start Tutorial](getting-started/quick-start) - Your first automation
-- [Core Concepts](concepts/states) - Understand the fundamentals
-- [DSL Documentation](dsl/DSL_TUTORIAL) - Learn the Domain-Specific Language
-- [API Reference](api/state-management) - Detailed API documentation
+- [The Three Tiers](tiers) - Pick the setup that fits how you want to run Qontinui
+- [DSL Tutorial](dsl/DSL_TUTORIAL) - Learn the Domain-Specific Language
+- [Multi-Monitor Support](monitor-selection) - Run automations on any display
+- [Keyboard Keys](keyboard-keys) - Special keys and key combinations
 
 ## DSL (Domain-Specific Language)
 

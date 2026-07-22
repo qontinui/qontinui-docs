@@ -1,3 +1,8 @@
+---
+sidebar_label: "Examples"
+sidebar_position: 4
+---
+
 # Qontinui DSL Examples
 
 This document contains complete, working examples of Qontinui DSL scripts for various automation scenarios. Each example includes the full JSON, explanation, and expected output.
@@ -459,9 +464,7 @@ grade = executor.execute("calculateGrade", [85])
 
 Simulates a login process with validation.
 
-**File:** `examples/user_auth.json`
-
-See: [examples/user_auth.json](examples/user_auth.json)
+**File:** `examples/user_auth.json` — _this example's JSON is not yet included in the repository._
 
 **Explanation:**
 
@@ -691,9 +694,7 @@ positive_count = executor.execute("countPositive", [[-3, 5, -1, 8, 0, 2]])
 
 Automates filling out a web form with validation.
 
-**File:** `examples/form_filling.json`
-
-See: [examples/form_filling.json](examples/form_filling.json)
+**File:** `examples/form_filling.json` — _this example's JSON is not yet included in the repository._
 
 **Explanation:**
 
@@ -718,9 +719,7 @@ success = executor.execute("fillContactForm", [data])
 
 Extracts data from multiple elements on a page.
 
-**File:** `examples/data_extraction.json`
-
-See: [examples/data_extraction.json](examples/data_extraction.json)
+**File:** `examples/data_extraction.json` — _this example's JSON is not yet included in the repository._
 
 **Explanation:**
 
@@ -733,9 +732,7 @@ See: [examples/data_extraction.json](examples/data_extraction.json)
 
 A complete workflow with multiple stages.
 
-**File:** `examples/workflow.json`
-
-See: [examples/workflow.json](examples/workflow.json)
+**File:** `examples/workflow.json` — _this example's JSON is not yet included in the repository._
 
 **Explanation:**
 

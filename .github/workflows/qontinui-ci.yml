@@ -1,20 +1,34 @@
 name: qontinui CI
+
+# The workflow name is the check context coord's merge engine reads. Keep it
+# stable ("qontinui CI") — renaming it orphans the recorded CI baseline.
+
 on: [push, pull_request]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
         with:
           node-version: 20
+          cache: npm
+
+      # Strict `npm ci`, not the bootstrap workflow's `npm ci || npm install`:
+      # the fallback turns a lockfile that has drifted from package.json into a
+      # silent resolve-from-scratch, so CI stops testing what ships.
       - name: Install dependencies
-        run: npm ci || npm install
-      - name: Type check
-        run: if [ -f tsconfig.json ]; then npx --yes tsc --noEmit; fi
-      - name: Lint
-        run: npm run lint --if-present
+        run: npm ci
+
+      # The real gate for this repo. `docusaurus build` validates that every
+      # sidebar entry resolves to a real doc and — via `onBrokenLinks: "throw"`
+      # — that no internal link 404s. Both of those are what had main red:
+      # sidebars.js listed 22 doc ids that were never authored.
       - name: Build
-        run: npm run build --if-present
-      - name: Test
-        run: npm test --if-present
+        run: npm run build
