@@ -33,15 +33,18 @@ jobs:
       - name: Build website
         run: npm run build
 
-      # `enablement: true` provisions the Pages site (build_type: workflow) on
-      # first run. GitHub Pages has never been turned on for this repo, so
-      # without it this step fails with "Get Pages site failed" and keeps main
-      # red no matter how healthy the build is. Provisioning here rather than
-      # in repo settings keeps the decision visible in version control.
+      # Pages is provisioned for this repo as build_type=workflow, serving at
+      # https://qontinui.github.io/qontinui-docs/ (must stay in sync with
+      # `baseUrl` in docusaurus.config.js).
+      #
+      # Do NOT add `enablement: true` here. Creating a Pages site is an
+      # `administration: write` operation, and that is not among the
+      # permissions a workflow can grant GITHUB_TOKEN — the action fails with
+      # "Create Pages site failed / HttpError: Resource not accessible by
+      # integration" (runs 29927176860 and 29927347005). Provisioning is a
+      # one-time repo-settings action, not something this workflow can do.
       - name: Setup Pages
         uses: actions/configure-pages@v4
-        with:
-          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
