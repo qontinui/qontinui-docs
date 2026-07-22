@@ -12,11 +12,12 @@ const config = {
   tagline: "Model-based GUI automation with AI-enhanced perception",
   favicon: "img/favicon.png",
 
-  // Set the production url of your site here
+  // Published as a GitHub Pages *project* site, so the served path is
+  // /<projectName>/. A bare "/" baseUrl is only correct for an org root site
+  // (a repo literally named qontinui.github.io) and would break every asset
+  // and internal link once deployed.
   url: "https://qontinui.github.io",
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/",
+  baseUrl: "/qontinui-docs/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.

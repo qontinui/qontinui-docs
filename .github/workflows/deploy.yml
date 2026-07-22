@@ -33,8 +33,15 @@ jobs:
       - name: Build website
         run: npm run build
 
+      # `enablement: true` provisions the Pages site (build_type: workflow) on
+      # first run. GitHub Pages has never been turned on for this repo, so
+      # without it this step fails with "Get Pages site failed" and keeps main
+      # red no matter how healthy the build is. Provisioning here rather than
+      # in repo settings keeps the decision visible in version control.
       - name: Setup Pages
         uses: actions/configure-pages@v4
+        with:
+          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

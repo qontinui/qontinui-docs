@@ -40,14 +40,21 @@ This command builds the website and pushes to the `gh-pages` branch.
 
 ```
 docs/
-├── intro.md                 # Welcome page
-├── getting-started/         # Installation and quick start
-├── concepts/               # Core concepts
-├── dsl/                   # DSL reference
-├── api/                   # API documentation
-├── migration/             # Migration guides
-└── advanced/              # Advanced topics
+├── intro.md                # Welcome page (served at the site root)
+├── tiers.md                # The three runner tiers
+├── monitor-selection.md    # Multi-monitor support
+├── keyboard-keys.md        # Special keys and key combinations
+└── dsl/                    # DSL reference
+    ├── README.md               # Overview (category index)
+    ├── DSL_SPECIFICATION.md    # Language reference
+    ├── DSL_TUTORIAL.md         # Step-by-step guide
+    ├── DSL_EXAMPLES.md         # Worked examples
+    └── examples/               # Example workflow JSON
 ```
+
+The sidebar is generated from this tree, so a new file appears in the nav
+automatically. Use `sidebar_position` / `sidebar_label` frontmatter to place
+it, and a directory's `_category_.json` to label a new category.
 
 ## 🎨 Customization
 
