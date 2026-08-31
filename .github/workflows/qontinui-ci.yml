@@ -25,8 +25,9 @@ name: qontinui CI
 # mergeStateStatus=UNSTABLE until the slower duplicate drained. A `concurrency:`
 # block does NOT fix it: `github.ref` differs by event (`refs/heads/<branch>` vs
 # `refs/pull/<n>/merge`) so the two runs land in different groups - measured,
-# qontinui-docs and qontinui-gym carry `cancel-in-progress: true` and still emit
-# both runs at one SHA. Plan:
+# this file and qontinui-gym's both carried `cancel-in-progress: true` when that
+# was measured, and still emitted both runs at one SHA. (qontinui-gym still
+# carries the unguarded flag - out of scope for this repo's PR.) Plan:
 # 2026-08-31-devops-unfiltered-push-trigger-duplicates-every-pr-ci-run.
 #
 # `pull_request:` is deliberately left UNFILTERED so stacked PRs based on a
@@ -40,9 +41,58 @@ on:
       - 'merge-candidate-batch/**'
   pull_request:
 
+# NEVER set `cancel-in-progress: true` unconditionally here. Scoping the `push:`
+# trigger above left `main` and `merge-candidate*` as the ONLY branches a push
+# run can fire on, so blanket cancellation no longer sheds redundant work - it
+# sheds runs on the two ref classes coord's merge engine reads.
+#
+#   - `main`. The group is shared by every push to the default branch, so a
+#     second land while the first one's run is still going cancels that run. The
+#     window is 70 s wide (run 33365400260, a post-merge main run:
+#     06:44:16Z -> 06:45:26Z) and the train lands back-to-back with
+#     COORD_MERGE_SLOTS=3, so this is reachable rather than theoretical.
+#
+#     Be honest about the size of it: every tree the train lands has already
+#     been built green before it lands - by candidate CI, or, when the rebase is
+#     a proven no-op, by the PR's own run - so the verdict a cancel destroys
+#     here is a redundant one, not a unique one. What makes it worth
+#     closing anyway is that it is destroyed SILENTLY - `ci_baseline.rs`
+#     `ingest_workflow_run` returns before the write when
+#     `is_supersession_conclusion` matches (`cancelled` | `stale`), a guard
+#     added after the 2026-06-18 qontinui-coord wedge, so the baseline quietly
+#     keeps its last conclusive verdict instead.
+#
+#     Do not read that guard as permission to cancel. It is a downstream
+#     compensation, living in one consumer, on whatever coord build happens to
+#     be running; the invariant belongs at the producer, which is this file.
+#
+#   - `merge-candidate*`. The train mints `merge-candidate/<proposal_id>` from
+#     the proposal id and a requeue re-queues the SAME proposal row
+#     (`merge_scheduler.rs` `revert_claim_to_queued` / `on_base_mismatch`), so
+#     the same ref is pushed again. The candidate verdict is head_sha scoped and
+#     a requeue re-rebases onto a moved main, so a cancelled older run is not
+#     misread as the new attempt's answer - the cost is the wasted run and the
+#     requeue churn, not a wrong verdict.
+#
+# The expression below is already in production on the repos that hit this
+# first: `qontinui-coord/ci.yml`, `qontinui-schemas/ts-typecheck.yml` and
+# `qontinui-schemas/schema-drift.yml` all carry it byte-identically. coord also
+# keys its GROUP by `github.event_name`; that is unnecessary here only because
+# this workflow has no `workflow_dispatch:` trigger (dispatch and push would
+# share `refs/heads/main`). Add one and key the group by `github.event_name` too.
+#
+# It keeps the one thing this block is worth having - superseding a PR's own
+# earlier run when that PR is pushed again. Safe, because coord reads PR checks
+# through the `coord.pr_check_runs_latest` view, partitioned by
+# `(repo, head_sha, name)`: the superseded attempt sits in a different partition
+# and is never consulted for the new head.
+#
+# Note this only stops an IN-PROGRESS run being killed; GitHub still drops a run
+# left PENDING in a group when a newer one queues behind it. That applies to
+# `deploy.yml`'s static `pages` group too.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
