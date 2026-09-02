@@ -26,8 +26,13 @@ name: qontinui CI
 # block does NOT fix it: `github.ref` differs by event (`refs/heads/<branch>` vs
 # `refs/pull/<n>/merge`) so the two runs land in different groups - measured,
 # this file and qontinui-gym's both carried `cancel-in-progress: true` when that
-# was measured, and still emitted both runs at one SHA. (qontinui-gym still
-# carries the unguarded flag - out of scope for this repo's PR.) Plan:
+# was measured, and still emitted both runs at one SHA. No note about what the
+# sibling carries TODAY follows, deliberately. The one that used to sit here
+# said qontinui-gym "still carries the unguarded flag"; qontinui-gym#6 took the
+# guard on 2026-09-02, so the note was false roughly two days after it was
+# written, in a comment nobody re-reads until they are already mid-edit. The
+# measurement above is a record and does not rot; a live-state claim about
+# another repo does. Plan:
 # 2026-08-31-devops-unfiltered-push-trigger-duplicates-every-pr-ci-run.
 #
 # `pull_request:` is deliberately left UNFILTERED so stacked PRs based on a
